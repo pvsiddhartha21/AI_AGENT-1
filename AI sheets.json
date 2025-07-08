@@ -1,0 +1,286 @@
+{
+  "name": "AI sheets",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nwelcome to deals zone of prime day sale, how can I assist you?",
+        "options": {
+          "showWelcomeScreen": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        -140
+      ],
+      "id": "7a514bbe-06de-41cf-ba5b-5abd487843f8",
+      "name": "When chat message received",
+      "webhookId": "a5f172d5-8852-4ea5-a1b2-86ac4228f514"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        -140
+      ],
+      "id": "700f9cd5-2853-4abe-910f-4e16944207e6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        40
+      ],
+      "id": "3d585a62-c74f-455e-989e-975c317c66e6",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "cUjJ9RzvxbVrY5r7",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        40
+      ],
+      "id": "0dcc0d18-1f9c-41df-b234-879d8265f402",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1crdGbkU2XvKJ1zSCSVUIC-QjVZdyH5N2LCzEzH6BmT8",
+          "mode": "list",
+          "cachedResultName": "AI sheets test",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1crdGbkU2XvKJ1zSCSVUIC-QjVZdyH5N2LCzEzH6BmT8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1crdGbkU2XvKJ1zSCSVUIC-QjVZdyH5N2LCzEzH6BmT8/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        340,
+        40
+      ],
+      "id": "56a5ea34-ed30-47fd-b830-b7eb5f919008",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "rbVA8M121A82dG2o",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1crdGbkU2XvKJ1zSCSVUIC-QjVZdyH5N2LCzEzH6BmT8",
+          "mode": "list",
+          "cachedResultName": "AI sheets test",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1crdGbkU2XvKJ1zSCSVUIC-QjVZdyH5N2LCzEzH6BmT8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1crdGbkU2XvKJ1zSCSVUIC-QjVZdyH5N2LCzEzH6BmT8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Product": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Product__using_to_match_', ``, 'string') }}",
+            "Deal Price": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Deal_Price', ``, 'string') }}",
+            "Original Price": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Original_Price', ``, 'string') }}",
+            "Discount": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Discount', ``, 'string') }}",
+            "Notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Product"
+          ],
+          "schema": [
+            {
+              "id": "Product",
+              "displayName": "Product",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Deal Price",
+              "displayName": "Deal Price",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Original Price",
+              "displayName": "Original Price",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Discount",
+              "displayName": "Discount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.6,
+      "position": [
+        180,
+        40
+      ],
+      "id": "639fa89a-7835-442e-af54-4f96ac98a45a",
+      "name": "Append or update row in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "rbVA8M121A82dG2o",
+          "name": "Google Sheets account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "When chat message received": [
+      {
+        "json": {
+          "name": "First item",
+          "code": 1
+        }
+      },
+      {
+        "json": {
+          "name": "Second item",
+          "code": 2
+        }
+      }
+    ]
+  },
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a7686eb4-a96a-4a59-8466-beffbde29212",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9e05a37428b822cbadae0cfce81d18f743e2ce4cac25afd38af7d3d1aed16eee"
+  },
+  "id": "mbYkDEWEoVEwi254",
+  "tags": []
+}
